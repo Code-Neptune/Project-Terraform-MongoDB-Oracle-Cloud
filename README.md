@@ -4,7 +4,7 @@
   <a href="https://github.com/Code-Neptune/Project-Terraform-MongoDB-Oracle-Cloud#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/Documentation-yes-brightgreen.svg" />
   <a href="#" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/Code-Neptune/Project-Terraform-MongoDB-Oracle-Clou" />
+    <img alt="License: MIT" src="https://img.shields.io/github/license/Code-Neptune/Project-Terraform-MongoDB-Oracle-Cloud" />
   </a>
   <a href="https://twitter.com/shashank_jadon" target="_blank">
     <img alt="Twitter: shashank_jadon" src="https://img.shields.io/twitter/follow/shashank_jadon.svg?style=social" />
