@@ -1,0 +1,328 @@
+ubuntu@freeinstance2ampere:~$ sudo docker exec -it localmongo1 bash
+root@mongo1:/# mongo
+MongoDB shell version v5.0.5
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("9cffff78-cdf4-46ff-b2f1-e3063dfffbe3") }
+MongoDB server version: 5.0.5
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+> use admin
+switched to db admin
+> db.auth("root","example12")
+1
+> rs.initiate()
+{
+        "info2" : "no configuration specified. Using a default configuration for the set",
+        "me" : "mongo1:27017",
+        "ok" : 1
+}
+rs0:SECONDARY> rs.add("129.154.224.17")
+{
+        "ok" : 1,
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1641117095, 1),
+                "signature" : {
+                        "hash" : BinData(0,"tHqQKdl2JWYNhhDssLRre7hlGEo="),
+                        "keyId" : NumberLong("7048544170327146501")
+                }
+        },
+        "operationTime" : Timestamp(1641117095, 1)
+}
+rs0:PRIMARY> rs.add("129.154.231.79")
+{
+        "ok" : 1,
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1641117107, 1),
+                "signature" : {
+                        "hash" : BinData(0,"c3heUrVMYTI6XL58ilHoiPiu6hQ="),
+                        "keyId" : NumberLong("7048544170327146501")
+                }
+        },
+        "operationTime" : Timestamp(1641117107, 1)
+}
+rs0:PRIMARY> rs.add("168.138.115.78")
+{
+        "ok" : 1,
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1641117118, 1),
+                "signature" : {
+                        "hash" : BinData(0,"8jZ1V2GnPEqNa9QIwPo0NlG8wlk="),
+                        "keyId" : NumberLong("7048544170327146501")
+                }
+        },
+        "operationTime" : Timestamp(1641117118, 1)
+}
+rs0:PRIMARY> cfg = rs.conf()
+{
+        "_id" : "rs0",
+        "version" : 4,
+        "term" : 1,
+        "members" : [
+                {
+                        "_id" : 0,
+                        "host" : "mongo1:27017",
+                        "arbiterOnly" : false,
+                        "buildIndexes" : true,
+                        "hidden" : false,
+                        "priority" : 1,
+                        "tags" : {
+
+                        },
+                        "secondaryDelaySecs" : NumberLong(0),
+                        "votes" : 1
+                },
+                {
+                        "_id" : 1,
+                        "host" : "129.154.224.17:27017",
+                        "arbiterOnly" : false,
+                        "buildIndexes" : true,
+                        "hidden" : false,
+                        "priority" : 1,
+                        "tags" : {
+
+                        },
+                        "secondaryDelaySecs" : NumberLong(0),
+                        "votes" : 1
+                },
+                {
+                        "_id" : 2,
+                        "host" : "129.154.231.79:27017",
+                        "arbiterOnly" : false,
+                        "buildIndexes" : true,
+                        "hidden" : false,
+                        "priority" : 1,
+                        "tags" : {
+
+                        },
+                        "secondaryDelaySecs" : NumberLong(0),
+                        "votes" : 1
+                },
+                {
+                        "_id" : 3,
+                        "host" : "168.138.115.78:27017",
+                        "arbiterOnly" : false,
+                        "buildIndexes" : true,
+                        "hidden" : false,
+                        "priority" : 1,
+                        "tags" : {
+
+                        },
+                        "secondaryDelaySecs" : NumberLong(0),
+                        "votes" : 1
+                }
+        ],
+        "protocolVersion" : NumberLong(1),
+        "writeConcernMajorityJournalDefault" : true,
+        "settings" : {
+                "chainingAllowed" : true,
+                "heartbeatIntervalMillis" : 2000,
+                "heartbeatTimeoutSecs" : 10,
+                "electionTimeoutMillis" : 10000,
+                "catchUpTimeoutMillis" : -1,
+                "catchUpTakeoverDelayMillis" : 30000,
+                "getLastErrorModes" : {
+
+                },
+                "getLastErrorDefaults" : {
+                        "w" : 1,
+                        "wtimeout" : 0
+                },
+                "replicaSetId" : ObjectId("61d17594b7983551c842a6a4")
+        }
+}
+rs0:PRIMARY> cfg.members[0].host = "152.67.24.51"
+152.67.24.51
+rs0:PRIMARY> rs.reconfig(cfg)
+{
+        "ok" : 1,
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1641117190, 1),
+                "signature" : {
+                        "hash" : BinData(0,"I8y4aC8gqPoiD9IHg+vzbKcILBo="),
+                        "keyId" : NumberLong("7048544170327146501")
+                }
+        },
+        "operationTime" : Timestamp(1641117190, 1)
+}
+rs0:PRIMARY> rs.status()
+{
+        "set" : "rs0",
+        "date" : ISODate("2022-01-02T09:55:10.858Z"),
+        "myState" : 1,
+        "term" : NumberLong(1),
+        "syncSourceHost" : "",
+        "syncSourceId" : -1,
+        "heartbeatIntervalMillis" : NumberLong(2000),
+        "majorityVoteCount" : 3,
+        "writeMajorityCount" : 3,
+        "votingMembersCount" : 4,
+        "writableVotingMembersCount" : 4,
+        "optimes" : {
+                "lastCommittedOpTime" : {
+                        "ts" : Timestamp(1641117306, 1),
+                        "t" : NumberLong(1)
+                },
+                "lastCommittedWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                "readConcernMajorityOpTime" : {
+                        "ts" : Timestamp(1641117306, 1),
+                        "t" : NumberLong(1)
+                },
+                "appliedOpTime" : {
+                        "ts" : Timestamp(1641117306, 1),
+                        "t" : NumberLong(1)
+                },
+                "durableOpTime" : {
+                        "ts" : Timestamp(1641117306, 1),
+                        "t" : NumberLong(1)
+                },
+                "lastAppliedWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                "lastDurableWallTime" : ISODate("2022-01-02T09:55:06.213Z")
+        },
+        "lastStableRecoveryTimestamp" : Timestamp(1641117246, 1),
+        "electionCandidateMetrics" : {
+                "lastElectionReason" : "electionTimeout",
+                "lastElectionDate" : ISODate("2022-01-02T09:51:16.162Z"),
+                "electionTerm" : NumberLong(1),
+                "lastCommittedOpTimeAtElection" : {
+                        "ts" : Timestamp(1641117076, 1),
+                        "t" : NumberLong(-1)
+                },
+                "lastSeenOpTimeAtElection" : {
+                        "ts" : Timestamp(1641117076, 1),
+                        "t" : NumberLong(-1)
+                },
+                "numVotesNeeded" : 1,
+                "priorityAtElection" : 1,
+                "electionTimeoutMillis" : NumberLong(10000),
+                "newTermStartDate" : ISODate("2022-01-02T09:51:16.192Z"),
+                "wMajorityWriteAvailabilityDate" : ISODate("2022-01-02T09:51:16.208Z")
+        },
+        "members" : [
+                {
+                        "_id" : 0,
+                        "name" : "152.67.24.51:27017",
+                        "health" : 1,
+                        "state" : 1,
+                        "stateStr" : "PRIMARY",
+                        "uptime" : 479,
+                        "optime" : {
+                                "ts" : Timestamp(1641117306, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDate" : ISODate("2022-01-02T09:55:06Z"),
+                        "lastAppliedWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                        "lastDurableWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                        "syncSourceHost" : "",
+                        "syncSourceId" : -1,
+                        "infoMessage" : "",
+                        "electionTime" : Timestamp(1641117076, 2),
+                        "electionDate" : ISODate("2022-01-02T09:51:16Z"),
+                        "configVersion" : 8,
+                        "configTerm" : 1,
+                        "self" : true,
+                        "lastHeartbeatMessage" : ""
+                },
+                {
+                        "_id" : 1,
+                        "name" : "129.154.224.17:27017",
+                        "health" : 1,
+                        "state" : 2,
+                        "stateStr" : "SECONDARY",
+                        "uptime" : 215,
+                        "optime" : {
+                                "ts" : Timestamp(1641117306, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDurable" : {
+                                "ts" : Timestamp(1641117306, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDate" : ISODate("2022-01-02T09:55:06Z"),
+                        "optimeDurableDate" : ISODate("2022-01-02T09:55:06Z"),
+                        "lastAppliedWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                        "lastDurableWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                        "lastHeartbeat" : ISODate("2022-01-02T09:55:10.795Z"),
+                        "lastHeartbeatRecv" : ISODate("2022-01-02T09:55:10.796Z"),
+                        "pingMs" : NumberLong(0),
+                        "lastHeartbeatMessage" : "",
+                        "syncSourceHost" : "152.67.24.51:27017",
+                        "syncSourceId" : 0,
+                        "infoMessage" : "",
+                        "configVersion" : 8,
+                        "configTerm" : 1
+                },
+                {
+                        "_id" : 2,
+                        "name" : "129.154.231.79:27017",
+                        "health" : 1,
+                        "state" : 2,
+                        "stateStr" : "SECONDARY",
+                        "uptime" : 203,
+                        "optime" : {
+                                "ts" : Timestamp(1641117306, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDurable" : {
+                                "ts" : Timestamp(1641117306, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDate" : ISODate("2022-01-02T09:55:06Z"),
+                        "optimeDurableDate" : ISODate("2022-01-02T09:55:06Z"),
+                        "lastAppliedWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                        "lastDurableWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                        "lastHeartbeat" : ISODate("2022-01-02T09:55:10.783Z"),
+                        "lastHeartbeatRecv" : ISODate("2022-01-02T09:55:10.779Z"),
+                        "pingMs" : NumberLong(0),
+                        "lastHeartbeatMessage" : "",
+                        "syncSourceHost" : "152.67.24.51:27017",
+                        "syncSourceId" : 0,
+                        "infoMessage" : "",
+                        "configVersion" : 8,
+                        "configTerm" : 1
+                },
+                {
+                        "_id" : 3,
+                        "name" : "168.138.115.78:27017",
+                        "health" : 1,
+                        "state" : 2,
+                        "stateStr" : "SECONDARY",
+                        "uptime" : 192,
+                        "optime" : {
+                                "ts" : Timestamp(1641117306, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDurable" : {
+                                "ts" : Timestamp(1641117306, 1),
+                                "t" : NumberLong(1)
+                        },
+                        "optimeDate" : ISODate("2022-01-02T09:55:06Z"),
+                        "optimeDurableDate" : ISODate("2022-01-02T09:55:06Z"),
+                        "lastAppliedWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                        "lastDurableWallTime" : ISODate("2022-01-02T09:55:06.213Z"),
+                        "lastHeartbeat" : ISODate("2022-01-02T09:55:10.784Z"),
+                        "lastHeartbeatRecv" : ISODate("2022-01-02T09:55:10.780Z"),
+                        "pingMs" : NumberLong(0),
+                        "lastHeartbeatMessage" : "",
+                        "syncSourceHost" : "152.67.24.51:27017",
+                        "syncSourceId" : 0,
+                        "infoMessage" : "",
+                        "configVersion" : 8,
+                        "configTerm" : 1
+                }
+        ],
+        "ok" : 1,
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1641117306, 1),
+                "signature" : {
+                        "hash" : BinData(0,"URpwT6Kzm7Rlv9JZvXLkPHxKTNk="),
+                        "keyId" : NumberLong("7048544170327146501")
+                }
+        },
+        "operationTime" : Timestamp(1641117306, 1)
+}
+rs0:PRIMARY> 

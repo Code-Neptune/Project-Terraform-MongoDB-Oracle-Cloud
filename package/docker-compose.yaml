@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mongo1:
+    hostname: mongo1
+    container_name: localmongo1
+    image: mongo-replica-set
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: project-example12
+    restart: always
+    volumes:
+            - mongodb_server_data:/data/db
+    command: --bind_ip_all --replSet rs0 --keyFile /data/key/replica-set.key
+volumes:
+  mongodb_server_data:
